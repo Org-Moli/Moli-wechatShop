@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
 /**
  * <p>名称</p>
@@ -25,6 +27,12 @@ public class UnirestUtils {
 
     private static Logger logger = Logger.getLogger(UnirestUtils.class);
 
+    public static String getServiceUrl()
+    {
+        ResourceBundle bundle = PropertyResourceBundle.getBundle("runtimes");
+        return bundle.getString("serviceUrl");
+    }
+
     /***
      * 获取string类型返回
      * @param url 地址
@@ -34,6 +42,7 @@ public class UnirestUtils {
      */
     public static String getStringResponse(String url, Map<String, Object> paramsMap, String method)
     {
+        url = getServiceUrl() + url;
         logger.info("UnirestUtils.getStringResponse=>链接地址:[" + url + "],参数:[" + (paramsMap != null ? paramsMap.toString() : "") + "],方法:[" + method + "]");
         if (StringUtils.isBlank(method))
         {
@@ -100,6 +109,7 @@ public class UnirestUtils {
      */
     public static String getStringResponse(String url)
     {
+        url = getServiceUrl() + url;
         logger.info("UnirestUtils.getStringResponse=>链接地址:[" + url + "],方法:[get]");
         try
         {
@@ -137,6 +147,7 @@ public class UnirestUtils {
      */
     public static String postStringResponse(String url)
     {
+        url = getServiceUrl() + url;
         logger.info("UnirestUtils.postStringResponse=>链接地址:[" + url + "],方法:[post]");
         try
         {
@@ -176,6 +187,7 @@ public class UnirestUtils {
      */
     public static JsonNode getJsonNodeResponse(String url, Map<String, Object> paramsMap, String method)
     {
+        url = getServiceUrl() + url;
         logger.info("UnirestUtils.getJsonNodeResponse=>链接地址:[" + url + "],参数:[" + (paramsMap != null ? paramsMap.toString() : "") + "],方法:[" + method + "]");
         if (StringUtils.isBlank(method))
         {
@@ -241,6 +253,7 @@ public class UnirestUtils {
      */
     public static JsonNode getJsonNodeResponse(String url)
     {
+        url = getServiceUrl() + url;
         logger.info("UnirestUtils.getJsonNodeResponse=>链接地址:[" + url + "],方法:[get]");
         try
         {
@@ -278,6 +291,7 @@ public class UnirestUtils {
      */
     public static JsonNode postJsonNodeResponse(String url)
     {
+        url = getServiceUrl() + url;
         logger.info("UnirestUtils.postJsonNodeResponse=>链接地址:[" + url + "],方法:[post]");
         try
         {
@@ -318,6 +332,7 @@ public class UnirestUtils {
      */
     public static Object getObjectResponse(String url, Map<String, Object> paramsMap, String method, Class T)
     {
+        url = getServiceUrl() + url;
         logger.info("UnirestUtils.getObjectResponse=>链接地址:[" + url + "],参数:[" + (paramsMap != null ? paramsMap.toString() : "") + "],方法:[" + method + "],类:[" + T + "]");
         if (StringUtils.isBlank(method))
         {
@@ -385,6 +400,7 @@ public class UnirestUtils {
      */
     public static Object getObjectResponse(String url, Class T)
     {
+        url = getServiceUrl() + url;
         logger.info("UnirestUtils.getObjectResponse=>链接地址:[" + url + "],方法:[get],类:[" + T + "]");
         try
         {
@@ -424,6 +440,7 @@ public class UnirestUtils {
      */
     public static Object postObjectResponse(String url, Class T)
     {
+        url = getServiceUrl() + url;
         logger.info("UnirestUtils.postObjectResponse=>链接地址:[" + url + "],方法:[post],类:[" + T + "]");
         try
         {
