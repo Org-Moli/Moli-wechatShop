@@ -130,7 +130,14 @@
                         , skin: 'msg'
                         , time: 2, //1秒后自动关闭
                         success: function () {
-                            location.href = '/common/index.do';
+                            if(result.origUrl != undefined && origUrl.length > 0)
+                            {
+                                location.href = origUrl;
+                            }
+                            else
+                            {
+                                location.href = '/common/index.do';
+                            }
                         }
                     });
                 }

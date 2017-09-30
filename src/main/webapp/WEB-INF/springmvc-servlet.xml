@@ -20,6 +20,29 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
+    <!--使用该种拦截器需注释 <mvc:annotation-driven-->
+
+    <!--<bean id="authorizeInterceptor" class="com.imory.intercept.ControllerIntercept"/>
+    <bean id="handlerMapping"
+          class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="authorizeInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>-->
+
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器，按顺序执行 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/> <!-- 表示拦截所有的url包括子url路径 -->
+            <bean class="com.imory.intercept.ControllerIntercept"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!-- 数据源配置 -->
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true"/>

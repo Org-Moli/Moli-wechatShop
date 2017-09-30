@@ -3,6 +3,7 @@ package com.imory.user.controller;
 import com.imory.base.ResultBean;
 import com.imory.user.bean.UserBase;
 import com.imory.utils.UnirestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,15 +31,26 @@ public class UserBaseInfoAjaxController {
     {
         JSONObject jsonObject = new JSONObject();
 
+        String origUrl = (String) session.getAttribute(UserBase.ORIG_URI);
+
         ResultBean resultBean = (ResultBean) UnirestUtils
                 .postObjectResponse("/userBase/login?mobile=" + mobile + "&yzmCode=" + yzmCode + "&captchaId=" + captchaId, ResultBean.class);
         if (resultBean.getSuccess())
         {
             jsonObject.put("success", true);
+            jsonObject.put("origUrl", origUrl);
+            if (StringUtils.isNotBlank(origUrl))
+            {
+                session.setAttribute(UserBase.ORIG_URI, "");
+            }
             Map userBaseMap = (Map) resultBean.getResultMap().get("userBase");
 
             UserBase userBase = new UserBase();
-            userBase.setUser_id((Integer)userBaseMap.get("user_id"));
+            userBase.setUser_id((Integer) userBaseMap.get("user_id"));
+            userBase.setMobile((String) userBaseMap.get("mobile"));
+            userBase.setStatus((Integer) userBaseMap.get("status"));
+            userBase.setUser_name((String) userBaseMap.get("user_name"));
+            session.setAttribute(UserBase.USER_SESSION_ID, userBase);
         } else
         {
             jsonObject.put("success", false);
