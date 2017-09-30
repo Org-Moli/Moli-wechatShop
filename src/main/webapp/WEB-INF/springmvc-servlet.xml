@@ -20,6 +20,20 @@
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
+    <!-- 数据源配置 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="propertiesArray">
+            <array>
+                <ref bean="runtimeProperties"/>
+            </array>
+        </property>
+    </bean>
+
+    <bean id="runtimeProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:runtimes.properties"/>
+    </bean>
+
     <!-- 配置根视图 -->
     <!--<mvc:view-controller path="/" view-name="index"/>-->
 
