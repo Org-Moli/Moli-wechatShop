@@ -80,7 +80,7 @@
                 <div class="swiper-wrapper" id="rmProductDiv">
                     <script type="text/x-jquery-tmpl" id="rmProductTmpl">
                     <div class="swiper-slide">
-                        <a href="pro_info.html">
+                        <a href="/product/productDetail.do?productId=#[$data.product_id]">
                             <img src="#[$data.picture_url]"/>
                             <p>#[$data.product_name]</p>
                             <p>¥#[$data.price]</p>
@@ -100,7 +100,7 @@
                 <div class="swiper-wrapper" id="xpProductDiv">
                     <script type="text/x-jquery-tmpl" id="xpProductTmpl">
                     <div class="swiper-slide">
-                        <a href="pro_info.html">
+                        <a href="/product/productDetail.do?productId=#[$data.product_id]">
                             <img src="#[$data.picture_url]"/>
                             <p>#[$data.product_name]</p>
                             <p>¥#[$data.price]</p>
