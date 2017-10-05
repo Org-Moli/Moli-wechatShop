@@ -130,9 +130,9 @@
                         , skin: 'msg'
                         , time: 2, //1秒后自动关闭
                         success: function () {
-                            if(result.origUrl != undefined && origUrl.length > 0)
+                            if(result.origUrl != undefined && result.origUrl.length > 0)
                             {
-                                location.href = origUrl;
+                                location.href = result.origUrl;
                             }
                             else
                             {

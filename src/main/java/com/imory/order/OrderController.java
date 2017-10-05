@@ -1,6 +1,5 @@
-package com.imory.shop.controller;
+package com.imory.order;
 
-import com.imory.annotation.SessionCheck;
 import com.imory.base.ResultBean;
 import com.imory.user.bean.UserBase;
 import com.imory.utils.UnirestUtils;
@@ -17,15 +16,14 @@ import javax.servlet.http.HttpSession;
  *
  * @author zb.jiang
  * @version 1.0
- * @Date 2017/9/30
+ * @Date 2017/10/5
  */
 @Controller
-@RequestMapping("/shop")
-public class ShopCartController {
+@RequestMapping("/order")
+public class OrderController {
 
-    @RequestMapping("/cartDetail")
-    @SessionCheck
-    public String cartDetail(HttpSession session, Model model)
+    @RequestMapping("/toOrder")
+    public String toOrder(HttpSession session, Model model)
     {
         UserBase userBase = (UserBase) session.getAttribute(UserBase.USER_SESSION_ID);
 
@@ -35,7 +33,6 @@ public class ShopCartController {
         {
             model.addAttribute("shopPingCartList", resultBean.getResultMap().get("shopPingCartList"));
         }
-        return "/shop/shopcart";
+        return "/order/orderInfo";
     }
-
 }
