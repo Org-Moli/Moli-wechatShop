@@ -84,6 +84,9 @@
         </div>
     </c:forEach>
 </div>
+<form action="/order/toOrder.do" id="orderForm" method="post">
+    <input name="ids" id="cartIds" type="hidden"/>
+</form>
 <!--底部导航-->
 <div class="foot-black"></div>
 <div class="weui-tabbar wy-foot-menu">
@@ -101,7 +104,7 @@
     <div class="weui-tabbar__item  npd">
         <p class="cart-total-txt">合计：<i></i><em class="num font-16" id="zong1">¥0.00</em></p>
     </div>
-    <a href="/order/toOrder.do" class="red-color npd w-90 t-c">
+    <a href="javascript:toOrder();" class="red-color npd w-90 t-c">
         <p class="promotion-foot-menu-label">去结算</p>
     </a>
 </div>
@@ -111,6 +114,7 @@
 <script type="text/javascript" src="/scripts/jquery.Spinner.js"></script>
 <script src="/scripts/jquery-weui.js"></script>
 <script src="/scripts/common.js"></script>
+<script src="/scripts/layer.js"></script>
 <!---全选按钮-->
 
 <script type="text/javascript">
@@ -155,6 +159,22 @@
                 }
             }
         });
+    }
+
+    function toOrder() {
+        var idsArr = [];
+        $("input[name='cartpro']:checked").each(function () {
+            var _index = $(this).attr("id").replace("cart-pto", "");
+            var _ids = $("#product_id_" + _index).val();
+            idsArr.push(_ids);
+        });
+        if(idsArr.length == 0)
+        {
+            layer.open({content: "请选择需要结算的商品", skin: 'msg', time: 2});
+            return;
+        }
+        $("#cartIds").val(idsArr.join("|").toString());
+        $("#orderForm").submit();
     }
     
     function settleMoney() {
