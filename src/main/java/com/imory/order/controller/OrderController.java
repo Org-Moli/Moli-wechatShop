@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>名称</p>
@@ -28,9 +30,11 @@ public class OrderController {
     @SessionCheck
     public String toOrder(String ids, HttpSession session, Model model)
     {
+        Map<String, Object> paramsMap = new HashMap<>();
+        paramsMap.put("ids", ids);
         UserBase userBase = (UserBase) session.getAttribute(UserBase.USER_SESSION_ID);
         ResultBean resultBean = (ResultBean) UnirestUtils
-                .postObjectResponse("/shop/orderCart?ids=" + ids, ResultBean.class);
+                .postObjectResponse("/shop/orderCart", paramsMap, ResultBean.class);
         if (resultBean.getSuccess())
         {
             model.addAttribute("shopPingCartList", resultBean.getResultMap().get("shopPingCartList"));

@@ -173,7 +173,7 @@
             layer.open({content: "请选择需要结算的商品", skin: 'msg', time: 2});
             return;
         }
-        $("#cartIds").val(idsArr.join("|").toString());
+        $("#cartIds").val(idsArr.toString());
         $("#orderForm").submit();
     }
     

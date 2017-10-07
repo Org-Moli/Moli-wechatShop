@@ -472,6 +472,47 @@ public class UnirestUtils {
         }
     }
 
+    /***
+     * 获取对象类型返回
+     * @param url 地址
+     * @param T 类
+     * @return 返回
+     */
+    public static Object postObjectResponse(String url, Map<String, Object> paramsMap, Class T)
+    {
+        url = getServiceUrl() + url;
+        logger.info("UnirestUtils.postObjectResponse=>链接地址:[" + url + "],方法:[post],参数:[" + (paramsMap != null ? paramsMap.toString() : "") + "]类:[" + T + "]");
+        try
+        {
+            setObjectMapper();
+            HttpResponse jsonResponse = jsonResponse = Unirest.post(url)
+                    .fields(paramsMap)
+                    .asObject(T);
+            if (200 == jsonResponse.getStatus())
+            {
+                return jsonResponse.getBody();
+            } else
+            {
+                logger.error("访问[" + url + "],返回状态:" + jsonResponse.getStatus());
+                return null;
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            logger.error("访问[" + url + "],出现异常:" + e.getMessage());
+            return null;
+        } finally
+        {
+            try
+            {
+                Unirest.shutdown();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     private static void setObjectMapper()
     {

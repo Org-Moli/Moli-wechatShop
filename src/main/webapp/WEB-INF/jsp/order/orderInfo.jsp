@@ -32,7 +32,7 @@
             <div class="weui-media-box__hd proinfo-txt-l" style="width:20px;"><span class="promotion-label-tit"><img
                     src="images/icon_nav_city.png"/></span></div>
             <div class="weui-media-box__bd">
-                <a href="address_list.html" class="weui-cell_access" style="line-height: 30px;">
+                <a href="/userBase/addressList.do" class="weui-cell_access" style="line-height: 30px;">
                     <c:choose>
                         <c:when test="${not empty deliveryAddress}">
                         <!--有收货地址-->
